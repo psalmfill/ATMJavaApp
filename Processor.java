@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Processor {
     Scanner scanner  = new Scanner(System.in);
-    int trialCount =0;
+   static int  trialCount =3;
     int option ;
     int logpin;
     int oldpin;     
@@ -29,7 +29,7 @@ public class Processor {
         
        while (start.toUpperCase().equals("Y")){
            this.showHeader();
-           this.setDisplay("Do want to continue with another transaction (Y/N):");
+           this.setDisplay("Do you want to continue with another transaction (Y/N):");
            scanner = new Scanner(System.in);
            start = scanner.nextLine();
            
@@ -42,8 +42,16 @@ public class Processor {
         if(this.checkPin(this.logpin)){
             this.showMenu();
         }else{
-            this.setDisplay("Invalid Login try again");
-            this.getlogin();
+            this.setDisplay("Invalid Login try again " + trialCount +" trial left");
+            
+            if(trialCount > 0){
+                trialCount--;
+                this.getlogin();
+                
+            }else{
+                 this.setDisplay("you have exceeded the trial period");
+            }
+            
         }
     }
     public void showHeader(){
